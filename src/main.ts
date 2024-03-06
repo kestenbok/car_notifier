@@ -1,34 +1,27 @@
 import 'dotenv/config';
+import { createTransport } from 'nodemailer';
 
-import Logger from './core/logger/logger';
 import VehicleService from './services/vehicle';
-import configureServer from './server';
-import configureJob from './job';
 
 async function main() {
-  const PORT = process.env.SERVER_PORT;
-  const HOST = process.env.SERVER_HOST;
-
   const PLATES = process.env.PLATES.split(',');
   const DRIVER_ID = process.env.DRIVER_ID;
 
   const service = new VehicleService(PLATES, DRIVER_ID);
-  await service.initialize();
+  // const vehicleInfo = await service.fetch();
 
-  const server = configureServer(service);
-  const job = configureJob(service);
+  const mailer = createTransport({
+    sendmail: true,
+  });
 
-  try {
-    job.start();
+  const { envelope, messageId } = await mailer.sendMail({
+    to: 'kristiyan.nedyalkov98@gmail.com',
+    from: 'car-notifier@mail.com',
+    subject: 'Car Notifier Daily Update',
+    text: 'Hopefully you get this :)',
+  });
 
-    server.listen({ port: PORT, host: HOST }, () => {
-      Logger.info(`Server ready to accept connections on ${HOST}:${PORT}`);
-    });
-  } catch (error) {
-    job.stop();
-    console.error(error);
-    process.exit(1);
-  }
+  console.log(envelope, messageId);
 }
 
 main();

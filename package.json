@@ -16,6 +16,7 @@
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^20.11.19",
+    "@types/nodemailer": "^6.4.14",
     "@typescript-eslint/eslint-plugin": "^7.0.1",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
@@ -29,6 +30,7 @@
     "cron": "^3.1.6",
     "dotenv": "^16.4.4",
     "fastify": "^4.26.1",
+    "nodemailer": "^6.9.11",
     "puppeteer": "^22.0.0"
   }
 }

@@ -1,4 +1,5 @@
 import puppeteer from 'puppeteer';
+
 import URLS from '../constants/urls';
 import { Result } from '../core/types/result';
 

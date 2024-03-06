@@ -1,0 +1,39 @@
+name: Daily Update
+on: workflow_dispatch
+
+env:
+  NODE_VERSION: 21
+  PNPM_VERSION: 8
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v3
+        name: Setup Node
+        with:
+          node-version: $NODE_VERSION
+
+      - uses: pnpm/action-setup@v3
+        name: Setup pnpm
+        with:
+          version: $PNPM_VERSION
+
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install
+
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - run: pnpm start
+        name: Run checks
