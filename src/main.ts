@@ -4,10 +4,10 @@ import { createTransport } from 'nodemailer';
 import VehicleService from './services/vehicle';
 
 async function main() {
-  const PLATES = process.env.PLATES.split(',');
-  const DRIVER_ID = process.env.DRIVER_ID;
+  // const PLATES = process.env.PLATES.split(',');
+  // const DRIVER_ID = process.env.DRIVER_ID;
 
-  const service = new VehicleService(PLATES, DRIVER_ID);
+  // const service = new VehicleService(PLATES, DRIVER_ID);
   // const vehicleInfo = await service.fetch();
 
   const mailer = createTransport({
