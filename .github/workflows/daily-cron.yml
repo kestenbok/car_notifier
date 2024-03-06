@@ -2,7 +2,6 @@ name: Daily Update
 on: workflow_dispatch
 
 env:
-  NODE_VERSION: v21
   PNPM_VERSION: 8
 
 jobs:
@@ -13,8 +12,6 @@ jobs:
 
       - uses: actions/setup-node@v3
         name: Setup Node
-        with:
-          node-version: $NODE_VERSION
 
       - uses: pnpm/action-setup@v3
         name: Setup pnpm
