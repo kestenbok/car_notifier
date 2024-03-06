@@ -24,5 +24,7 @@
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "useUnknownInCatchVariables": false
-  }
+  },
+  "include": ["./src", "./@types"],
+  "exclude": ["./node_modules"]
 }

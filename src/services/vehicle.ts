@@ -3,7 +3,7 @@ import { readFile, writeFile } from 'fs/promises';
 import vignetteChecker from '../checkers/vignette';
 import fineChecker from '../checkers/fines';
 import insuranceChecker from '../checkers/insurance';
-import Logger from 'src/core/logger/logger';
+import Logger from '../core/logger/logger';
 
 class VehicleService {
   private plates: string[];
@@ -57,18 +57,18 @@ class VehicleService {
     const vehicles = [];
 
     for (const plate of this.plates) {
-      const vignette = await vignetteChecker.checkVignette(plate);
-      const fines = await fineChecker.checkFines(plate, this.driverID);
+      // const vignette = await vignetteChecker.checkVignette(plate);
+      // const fines = await fineChecker.checkFines(plate, this.driverID);
       const insurance = await insuranceChecker.checkInsurance(plate);
 
-      if (vignette.error) throw vignette.error;
-      if (fines.error) throw fines.error;
+      // if (vignette.error) throw vignette.error;
+      // if (fines.error) throw fines.error;
       if (insurance.error) throw insurance.error;
 
       vehicles.push({
         plate,
-        fines: fines.data,
-        vignette: vignette.data,
+        // fines: fines.data,
+        // vignette: vignette.data,
         insurance: insurance.data,
       });
     }
